@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from "react";
-import {useHistory, useParams, useRouteMatch} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {updateAvailability, readReservation} from "../utils/api";
 import ErrorAlert from "./ErrorAlert";
 import { tableDoesNotExists, reservationDoesNotExist, tableIsNotBigEnough, tableIsOccupied } from "./FrontEndValidations";
 
 function Seating({showTables, loadTables}) {
     const {reservationId} = useParams();
+    console.log("reservationId", reservationId)
     const [tableId, setTableId] = useState();
     const [reservation, setReservation] = useState({});
     const [error, setError] = useState(null);
     const [frontEndError, setFrontEndError] = useState([]);
-    console.log("reservationId", reservationId)
+
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -47,7 +48,7 @@ function Seating({showTables, loadTables}) {
         setFrontEndError([])
         setError(null);
         const tableSelect = showTables.find(
-            (table) => table.table_id == tableId
+            (table) => Number(table.table_id) === Number(tableId)
         );
         console.log(tableSelect)
         const validations = [];

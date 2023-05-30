@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
-import { tooEarlyOrTooLate, notOnTuesday, notOnPreviousDate } from "./FrontEndValidations";
+import React from "react";
 
 function ReservationForm({ handleChange, handleSubmit, handleCancel, formData, setFrontEndError }) {
+    
     // function handleSubmit(event) {
     //     event.preventDefault()
     //     console.log("HANDLE SUBMIT")
@@ -39,7 +39,7 @@ function ReservationForm({ handleChange, handleSubmit, handleCancel, formData, s
                     <input id="last_name" name="last_name" type="text" onChange={handleChange} value={formData.last_name}/>
                 </label>
                 <label htmlFor="mobile_number">Mobile Number
-                    <input id="mobile_number" name="mobile_number" type="text" pattern="\d{3}[\-]\d{3}[\-]\d{4}" placeholder="xxx-xxx-xxxx" onChange={handleChange} value={formData.mobile_number}/>
+                    <input id="mobile_number" name="mobile_number" type="text" placeholder="xxx-xxx-xxxx" onChange={handleChange} value={formData.mobile_number}/>
                 </label>
                 <label htmlFor="reservation_date">Reservation Date
                     <input id="reservation_date" name="reservation_date" type="date" onChange={handleChange} value={formData.reservation_date}/>

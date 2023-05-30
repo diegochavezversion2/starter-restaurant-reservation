@@ -97,8 +97,8 @@ function Dashboard({reservationsError, reservations, showTables, tablesError, da
         <button className="btn btn-primary" onClick={todayHandler}>Today</button>
       </div>
       <ErrorAlert error={reservationsError} />
-      {/* <ErrorAlert error={tablesError} />
-      <ErrorAlert error={deleteError} /> */}
+      <ErrorAlert error={tablesError} />
+      <ErrorAlert error={deleteError} />
       <div>
         <table className="table">
           <thead>

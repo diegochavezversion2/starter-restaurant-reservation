@@ -5,7 +5,7 @@ function list() {
 }
 
 function create(newTable) {
-    return knex("tables").insert(newTable, ["table_name", "capacity"]);
+    return knex("tables").insert(newTable, "*");
 }
 
 function updateOccupancy(reservation_id, table_id) {

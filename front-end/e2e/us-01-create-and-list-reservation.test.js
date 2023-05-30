@@ -37,7 +37,7 @@ describe("US-01 - Create and list reservations - E2E", () => {
 
       await page.type("input[name=first_name]", "James");
       await page.type("input[name=last_name]", lastName);
-      await page.type("input[name=mobile_number]", " ");
+      await page.type("input[name=mobile_number]", "800-555-1212");
       await page.type("input[name=reservation_date]", "01012035");
       await page.type("input[name=reservation_time]", "1330");
       await page.type("input[name=people]", "2");
@@ -62,15 +62,14 @@ describe("US-01 - Create and list reservations - E2E", () => {
 
     test("canceling form returns to previous page", async () => {
       await page.goto(`${baseURL}/dashboard`, { waitUntil: "networkidle0" });
-      // console.log("dashboard page ------------")
       await page.goto(`${baseURL}/reservations/new`, {
         waitUntil: "networkidle0",
       });
-      // console.log("reservations new page ------------")
+
       const [cancelButton] = await page.$x(
         "//button[contains(translate(., 'ACDEFGHIJKLMNOPQRSTUVWXYZ', 'acdefghijklmnopqrstuvwxyz'), 'cancel')]"
       );
-        // console.log("after cancel button ------------", cancelButton)
+
       if (!cancelButton) {
         throw new Error("button containing cancel not found.");
       }
