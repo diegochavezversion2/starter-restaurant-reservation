@@ -1,34 +1,6 @@
 import React from "react";
 
-function ReservationForm({ handleChange, handleSubmit, handleCancel, formData, setFrontEndError }) {
-    
-    // function handleSubmit(event) {
-    //     event.preventDefault()
-    //     console.log("HANDLE SUBMIT")
-    // }
-
-    // function validateForm() {
-    //     console.log("validate form")
-    //     setFrontEndError([])
-    //     const frontEndValidations = []
-    //     if (notOnPreviousDate(formData.reservation_date)) {
-    //         frontEndValidations.push({id: 1, message: "Cannot make reservation that occurs in the past"})
-    //     }
-    //     if (notOnTuesday(formData.reservation_date)) {
-    //         frontEndValidations.push({id: 2, message: "Cannot make reservation on a Tuesday"})
-    //     }
-    //     if (tooEarlyOrTooLate(formData.reservation_date, formData.reservation_time)) {
-    //         frontEndValidations.push({id: 3, message: "Cannot make reservation for a bad time."})
-    //     }
-    //     if (frontEndValidations.length) {
-    //         setFrontEndError(frontEndValidations);
-    //         return
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     validateForm()
-    // }, [formData])
+function ReservationForm({ handleChange, handleSubmit, handleCancel, formData }) {
     
     return (
         <form onSubmit={handleSubmit}>

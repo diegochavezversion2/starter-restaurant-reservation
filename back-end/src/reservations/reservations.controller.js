@@ -162,14 +162,6 @@ function notOnPreviousDate(req, res, next) {
   next();
 }
 
-// function hasId(req, res, next) {
-//   const reservationId = req.params.reservationId;
-//   if(reservationId) {
-//     return next()
-//   }
-//   next({status: 400, message: `Must include reservationId`})
-// }
-
 function statusOfStatus(req, res, next) {
   const reservation = res.locals.reservation
   if (reservation.status === "finished") {
@@ -229,7 +221,6 @@ async function read(req, res, next) {
 async function updateStatus(req, res) {
   const reservation_id = req.params.reservation_id
   const status = req.body.data.status
-  console.log("HELLO========", reservation_id, status)
   const dataFromService = await service.updateStatus(reservation_id, status);
   const data = dataFromService[0];
   res.json({

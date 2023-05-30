@@ -28,7 +28,6 @@ function NewReservation() {
     }
 
     async function handleSubmit(event) {
-        console.log("HELLOOOOOOOOO")
         event.preventDefault();
         setFrontEndError([])
         const frontEndValidations = []
@@ -67,7 +66,7 @@ function NewReservation() {
                     return <div key={e.id}>{e.message}</div>;
                 })}
             </div> : null }
-            <ReservationForm handleChange={handleChange} handleSubmit={handleSubmit} handleCancel={handleCancel} formData={formData} setFrontEndError={setFrontEndError} />
+            <ReservationForm handleChange={handleChange} handleSubmit={handleSubmit} handleCancel={handleCancel} formData={formData} />
         </div>
     )
 }

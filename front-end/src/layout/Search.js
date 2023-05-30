@@ -19,7 +19,6 @@ function Search() {
         setSearchedReservations([])
         setError(null)
         setNotFoundMessage(null)
-        // phoneData.mobile_number = Number(phoneData.mobile_number);
         const abortController = new AbortController();
         listReservations(phoneData, abortController.signal).then((data) => {
             if (data.length === 0) {

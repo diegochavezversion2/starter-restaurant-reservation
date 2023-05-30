@@ -13,8 +13,6 @@ import {previous, next, today} from "../utils/date-time"
 function Dashboard({reservationsError, reservations, showTables, tablesError, date, loadTables, loadReservations }) {
   const [deleteError, setDeleteError] = useState(null)
   const history = useHistory();
-  // const {deckId} = useParams();
-  // const {path,url} = useRouteMatch();
 
 
   const reservationRows = reservations.map(({reservation_id, first_name, last_name, mobile_number, reservation_date, reservation_time, people, status}) => (

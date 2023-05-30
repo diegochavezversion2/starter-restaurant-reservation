@@ -11,7 +11,6 @@ function NewTable({loadTables}) {
 
     const [tableData, setTableData] = useState(initialTableData);
     const [error, setError] = useState(null);
-    // const [frontEndError, setFrontEndError] = useState([]);
 
     const history = useHistory();
 
@@ -21,10 +20,6 @@ function NewTable({loadTables}) {
             [name]: value,
         }));
     }
-
-    // const frontEndErrors = frontEndError.map((frontError) => (
-    //     <p className="alert alert-danger">{frontError}</p>
-    // ))
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -44,7 +39,6 @@ function NewTable({loadTables}) {
         <div>
             <h1>Create Table</h1>
             <ErrorAlert className="alert alert-danger" error={error} />
-            {/* {frontEndErrors} */}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="table_name">Table Name
                     <input id="table_name" name="table_name" type="text" minLength="2" onChange={handleChange} value={tableData.table_name}/>

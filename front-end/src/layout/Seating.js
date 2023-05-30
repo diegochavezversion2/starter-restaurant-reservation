@@ -6,7 +6,6 @@ import { tableDoesNotExists, reservationDoesNotExist, tableIsNotBigEnough, table
 
 function Seating({showTables, loadTables}) {
     const {reservationId} = useParams();
-    console.log("reservationId", reservationId)
     const [tableId, setTableId] = useState();
     const [reservation, setReservation] = useState({});
     const [error, setError] = useState(null);
@@ -32,16 +31,6 @@ function Seating({showTables, loadTables}) {
     function handleChange(event) {
         setTableId(Number(event.target.value))
     }
-    
-    // function doTheyFit(seat, err) {
-    //     let num = Number(reservation.people)
-    //     console.log(seat)
-    //     let findTable = showTables.find((table) => table.table_id == reservation.reservation_id);
-    //     let tableNum = findTable.capacity
-    //     if (num > tableNum) {
-    //         err.push("More than capacity.")
-    //     }
-    // }
 
     async function handleSubmit(event) {
         event.preventDefault();

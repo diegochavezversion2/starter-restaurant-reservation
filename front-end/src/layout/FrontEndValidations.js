@@ -1,8 +1,4 @@
 
-// <div id="alert-Div" className="alert alert-danger"> {errors Here} </div>
-
-//not on a tuesday, not in the past , during open hours
-
 export function tooEarlyOrTooLate(reservationDate, reservationTime) {
     const splitHrsAndMin = reservationTime.split(':');
     const hour = Number(splitHrsAndMin[0]);
@@ -68,7 +64,6 @@ export function notOnPreviousDate(reservation_date) {
     return false
 }
 
-// seat table, table does not exist, reservation does not exist, table is occupied, table is not big enoug
 
 export function tableDoesNotExists(table_id) {
     if (!table_id) {
