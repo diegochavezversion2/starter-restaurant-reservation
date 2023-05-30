@@ -39,7 +39,6 @@ function Seating({showTables, loadTables}) {
         const tableSelect = showTables.find(
             (table) => Number(table.table_id) === Number(tableId)
         );
-        console.log(tableSelect)
         const validations = [];
         if (tableDoesNotExists(tableSelect.table_id)) {
             validations.push({id: 4, message: "Table does not exist."})

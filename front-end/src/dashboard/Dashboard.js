@@ -49,7 +49,6 @@ function Dashboard({reservationsError, reservations, showTables, tablesError, da
   ));
 
   async function handleCancelReservation(reservation_id) {
-    console.log(reservation_id)
     if(window.confirm("Do you want to cancel this reservation? This cannot be undone.")) {
         const abortController = new AbortController();
         updateStatus(reservation_id, "cancelled", abortController.signal)
