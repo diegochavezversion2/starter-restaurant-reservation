@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import {createTable} from "../utils/api";
 import ErrorAlert from "./ErrorAlert";
 
-function NewTable({loadTables}) {
+function NewTable() {
     const initialTableData = {
         table_name: "",
         capacity: "",
@@ -26,7 +26,7 @@ function NewTable({loadTables}) {
         tableData.capacity = Number(tableData.capacity)
         const abortController = new AbortController();
         createTable(tableData, abortController.signal).then(() => {
-            loadTables().then(history.push(`/dashboard`))
+            history.push(`/dashboard`)
         })
         .catch((error) => setError(error));
     }

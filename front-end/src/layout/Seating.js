@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {useHistory, useParams} from "react-router-dom";
-import {updateAvailability, readReservation} from "../utils/api";
+import {updateAvailability, readReservation, listTables} from "../utils/api";
 import ErrorAlert from "./ErrorAlert";
 import { tableDoesNotExists, reservationDoesNotExist, tableIsNotBigEnough, tableIsOccupied } from "./FrontEndValidations";
 
-function Seating({showTables, loadTables, loadReservations}) {
+function Seating() {
     const {reservationId} = useParams();
+    const [tables, setTables] = useState([])
+    const [tablesError, setTablesError] = useState(null);
     const [tableId, setTableId] = useState();
     const [reservation, setReservation] = useState({});
     const [error, setError] = useState(null);
@@ -22,9 +24,21 @@ function Seating({showTables, loadTables, loadReservations}) {
         return () => abortController.abort();
     }, [reservationId]);
 
+    useEffect(loadTables, []);
+
+  function loadTables() {
+    const abortController = new AbortController();
+    setTablesError(null);
+    listTables(abortController.signal)
+      .then(data => setTables(data))
+      .catch(setTablesError)
+    return () => abortController.abort();
+  }
+
+
     const history = useHistory();
 
-    const tableRows = showTables.map((table) => (
+    const tableRows = tables.map((table) => (
         <option key={table.table_id} value={table.table_id}>{table.table_name} - {table.capacity}</option>
     ));
 
@@ -36,7 +50,7 @@ function Seating({showTables, loadTables, loadReservations}) {
         event.preventDefault();
         setFrontEndError([])
         setError(null);
-        const tableSelect = showTables.find(
+        const tableSelect = tables.find(
             (table) => Number(table.table_id) === Number(tableId)
         );
         const validations = [];
@@ -58,8 +72,6 @@ function Seating({showTables, loadTables, loadReservations}) {
         }
         const abortController = new AbortController();
         updateAvailability(reservationId, tableId, abortController.signal).then(() => {
-            loadReservations()
-            loadTables()
             history.push(`/dashboard?date=${reservation.reservation_date}`)
         })
         .catch((error) => setError(error))
@@ -73,6 +85,7 @@ function Seating({showTables, loadTables, loadReservations}) {
         <div>
             <h1>Assign Seating</h1>
             <ErrorAlert className="alert alert-danger" error={error} />
+            <ErrorAlert className="alert alert-danger" error={tablesError} />
             {frontEndError.length? 
             <div id="alert-Div" className="alert alert-danger">
                 {frontEndError.map((e) => {

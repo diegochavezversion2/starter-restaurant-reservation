@@ -47,7 +47,6 @@ function NewReservation({loadReservations}) {
         formData.people = Number(formData.people)
         const abortController = new AbortController();
         createReservation(formData, abortController.signal).then(() => {
-            loadReservations()
             history.push(`/dashboard?date=${formData.reservation_date}`);
         })
         .catch((error) => setError(error));

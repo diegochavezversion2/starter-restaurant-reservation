@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { finishTable, updateStatus } from "../utils/api";
+import React, {useState, useEffect} from "react";
+import { finishTable, updateStatus, listTables, listReservations } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import {useHistory} from "react-router-dom";
 import {previous, next, today} from "../utils/date-time"
@@ -10,9 +10,35 @@ import {previous, next, today} from "../utils/date-time"
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function Dashboard({reservationsError, reservations, showTables, tablesError, date, loadTables, loadReservations }) {
+function Dashboard({ date }) {
   const [deleteError, setDeleteError] = useState(null)
+  const [tablesError, setTablesError] = useState(null);
+  const [tables, setTables] = useState([])
+  const [reservations, setReservations] = useState([]);
+  const [reservationsError, setReservationsError] = useState(null);
   const history = useHistory();
+
+  useEffect(loadTables, []);
+
+  function loadTables() {
+    const abortController = new AbortController();
+    setTablesError(null);
+    listTables(abortController.signal)
+      .then(data => setTables(data))
+      .catch(setTablesError)
+    return () => abortController.abort();
+  }
+
+  useEffect(loadReservations, [date]);
+
+  function loadReservations() {
+    const abortController = new AbortController();
+    setReservationsError(null);
+    listReservations({ date }, abortController.signal)
+      .then(data => setReservations(data))
+      .catch(setReservationsError);
+    return () => abortController.abort();
+  }
 
 
   const reservationRows = reservations.map(({reservation_id, first_name, last_name, mobile_number, reservation_date, reservation_time, people, status}) => (
@@ -36,7 +62,7 @@ function Dashboard({reservationsError, reservations, showTables, tablesError, da
       </td>
     </tr>
   ));
-  const tableRows = showTables.map((table) => (
+  const tableRows = tables.map((table) => (
     <tr key={table.table_id}>
       <th scope="row">{table.table_id}</th>
       <td>{table.table_name}</td>
