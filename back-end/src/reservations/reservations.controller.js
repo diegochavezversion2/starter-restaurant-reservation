@@ -187,6 +187,16 @@ async function idExists(req, res, next) {
   next({status: 404, message: `ReservationId: ${req.params.reservation_id} does not exist.`})
 }
 
+function validPhoneNumber(req, res, next) {
+  const phone = req.body.data.mobile_number
+  const splitNum = phone.split("-").join("")
+  console.log("here============", splitNum, Number(splitNum))
+  if (/^\d+$/.test(splitNum) === false) {
+    return next({status: 400, message: 'Phone number has to be numbers'})
+  }
+  next()
+}
+
 async function list(req, res) {
   if (req.query.date) {
     
@@ -243,6 +253,7 @@ module.exports = {
     hasFirstName, 
     hasLastName, 
     hasPhoneNumber, 
+    validPhoneNumber,
     hasReservationDate,
     dateIsDate, 
     hasReservationTime,
@@ -260,6 +271,7 @@ module.exports = {
     hasFirstName,
     hasLastName,
     hasPhoneNumber,
+    validPhoneNumber,
     hasReservationDate,
     dateIsDate,
     hasReservationTime,

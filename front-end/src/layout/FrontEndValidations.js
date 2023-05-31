@@ -64,6 +64,16 @@ export function notOnPreviousDate(reservation_date) {
     return false
 }
 
+// export function phoneNumberIsNotAtLeastTenCharacters(phoneNumber) {
+//     if (phoneNumber.length < 10) {
+//         return true
+//     }
+// return false
+// }
+
+
+
+// creating table validations
 
 export function tableDoesNotExists(table_id) {
     if (!table_id) {

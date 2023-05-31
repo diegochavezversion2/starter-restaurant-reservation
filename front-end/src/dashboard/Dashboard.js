@@ -29,10 +29,10 @@ function Dashboard({reservationsError, reservations, showTables, tablesError, da
         {status === "booked"? <a className="btn btn-primary" href={`/reservations/${reservation_id}/seat`} >Seat</a>: null}    
       </td>
       <td>
-        <a href={`/reservations/${reservation_id}/edit`} >Edit</a>    
+        {status === "booked"? <a href={`/reservations/${reservation_id}/edit`} >Edit</a>: null}    
       </td>
       <td>
-        <button data-reservation-id-cancel={reservation_id} onClick={() => handleCancelReservation(reservation_id)} >Cancel</button>    
+        {status === "booked" && <button data-reservation-id-cancel={reservation_id} onClick={() => handleCancelReservation(reservation_id)} >Cancel</button>}    
       </td>
     </tr>
   ));

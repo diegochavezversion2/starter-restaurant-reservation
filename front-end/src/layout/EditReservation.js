@@ -4,7 +4,7 @@ import ErrorAlert from "./ErrorAlert";
 import { readReservation, updateReservation } from "../utils/api";
 import ReservationForm from "./ReservationForm";
 
-function EditReservation() {
+function EditReservation({loadReservations, loadTables}) {
     const {reservationId} = useParams();
     const initialFormData = {
         first_name: "",
@@ -40,6 +40,7 @@ function EditReservation() {
             return
         }
         updateReservation(reservationId, reservation, abortController.signal).then(() => {
+            loadReservations()
             history.push(`/dashboard?date=${reservation.reservation_date}`);
         })
         .catch((error) => setError(error));

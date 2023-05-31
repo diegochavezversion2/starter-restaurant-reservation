@@ -6,7 +6,7 @@ import ReservationForm from "./ReservationForm";
 import { tooEarlyOrTooLate, notOnTuesday, notOnPreviousDate } from "./FrontEndValidations";
 
 
-function NewReservation() {
+function NewReservation({loadReservations}) {
     const initialFormData = {
         first_name: "",
         last_name: "",
@@ -47,6 +47,7 @@ function NewReservation() {
         formData.people = Number(formData.people)
         const abortController = new AbortController();
         createReservation(formData, abortController.signal).then(() => {
+            loadReservations()
             history.push(`/dashboard?date=${formData.reservation_date}`);
         })
         .catch((error) => setError(error));

@@ -4,7 +4,7 @@ import {updateAvailability, readReservation} from "../utils/api";
 import ErrorAlert from "./ErrorAlert";
 import { tableDoesNotExists, reservationDoesNotExist, tableIsNotBigEnough, tableIsOccupied } from "./FrontEndValidations";
 
-function Seating({showTables, loadTables}) {
+function Seating({showTables, loadTables, loadReservations}) {
     const {reservationId} = useParams();
     const [tableId, setTableId] = useState();
     const [reservation, setReservation] = useState({});
@@ -58,7 +58,9 @@ function Seating({showTables, loadTables}) {
         }
         const abortController = new AbortController();
         updateAvailability(reservationId, tableId, abortController.signal).then(() => {
-            loadTables().then(history.push("/"))
+            loadReservations()
+            loadTables()
+            history.push(`/dashboard?date=${reservation.reservation_date}`)
         })
         .catch((error) => setError(error))
     }
